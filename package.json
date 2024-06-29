@@ -1,0 +1,14 @@
+{
+    "name": "seo-analyzer",
+    "version": "1.0.0",
+    "description": "A simple SEO analyzer",
+    "main": "server.js",
+    "scripts": {
+        "start": "node server.js"
+    },
+    "dependencies": {
+        "axios": "^0.21.1",
+        "cheerio": "^1.0.0-rc.10",
+        "express": "^4.17.1"
+    }
+}
