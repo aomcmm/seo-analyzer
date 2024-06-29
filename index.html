@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SEO Analyzer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .result {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>SEO Analyzer</h1>
+        <form id="analyzeForm">
+            <label for="url">Enter URL:</label>
+            <input type="url" id="url" name="url" required>
+            <button type="submit">Analyze</button>
+        </form>
+        <div class="result" id="result">
+            <!-- Analysis results will be displayed here -->
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('analyzeForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const url = document.getElementById('url').value;
+            fetch(`/analyze?url=${encodeURIComponent(url)}`)
+                .then(response => response.json())
+                .then(data => displayResults(data))
+                .catch(error => console.error('Error:', error));
+        });
+
+        function displayResults(data) {
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = `
+                <h2>SEO Analysis Results</h2>
+                <p><strong>Title:</strong> ${data.title}</p>
+                <p><strong>Title Length:</strong> ${data.titleLength}</p>
+                <p><strong>Meta Description:</strong> ${data.metaDescription}</p>
+                <p><strong>Meta Description Length:</strong> ${data.metaDescriptionLength}</p>
+                <p><strong>H1 Tags:</strong> ${data.h1}</p>
+                <p><strong>H2 Tags:</strong> ${data.h2}</p>
+            `;
+        }
+    </script>
+</body>
+</html>
